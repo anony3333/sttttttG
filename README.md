@@ -16,6 +16,7 @@
 |       |-- solution.py for Figure8(b)
 |       `-- speedup_case_study.py for Figure9
 |-- test_cases
+|-- tvm-graph
 ```
 
 
