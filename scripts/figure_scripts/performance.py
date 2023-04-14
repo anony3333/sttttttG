@@ -82,11 +82,10 @@ if __name__ == "__main__":
     plt.subplots_adjust(hspace=0.5)
     # plt.show()
 
-    plt.savefig(outname, bbox_inches='tight')
-    # if VOERALL==1:
-    #     plt.savefig(outname, bbox_inches='tight')
-    # else:
-    #     plt.savefig(outname.replace(".pdf","-3.pdf"), bbox_inches='tight')
+    if VOERALL==1:
+        plt.savefig(outname, bbox_inches='tight')
+    else:
+        plt.savefig(outname.replace(".pdf","-part.pdf"), bbox_inches='tight')
 
     print("average to fuse", sum_Tofuse/(24*4), "max", highest_Tofuse)
     print("average to parallel", sum_Toparallel/(24*4), "max", highest_Toparallel)

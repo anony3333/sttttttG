@@ -63,7 +63,7 @@ if __name__ == "__main__":
     plt.subplots_adjust(hspace=0.7)
     
     # plt.show()
-    plt.savefig("eva-overall-speedup-a100.pdf", bbox_inches='tight')
+    plt.savefig("eva-overall-speedup-v100.pdf", bbox_inches='tight')
     
     print(sum["64"]/24, sum["128"]/24,sum["256"]/24, sum["512"]/24)
 

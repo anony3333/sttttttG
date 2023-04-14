@@ -123,7 +123,7 @@ if __name__ == "__main__":
     if VOERALL==1:
         plt.savefig(outname, bbox_inches='tight')
     else:
-        plt.savefig(outname.replace(".pdf","-3.pdf"), bbox_inches='tight')
+        plt.savefig(outname.replace(".pdf","-part.pdf"), bbox_inches='tight')
 
 
     print("average search times",sum_step/(24*4),"highest", highest_step)
