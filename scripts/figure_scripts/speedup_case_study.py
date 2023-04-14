@@ -16,7 +16,7 @@ def compute_speedup(data,stencil):
 
 
 if __name__ == "__main__":
-    filename = "./source/data/performance_a100-v3.json"
+    filename = "../../realworld_stencil/performance_v100.json"
     with open(filename, "r") as f:
         data = json.load(f)
     # filter stencil
@@ -48,5 +48,5 @@ if __name__ == "__main__":
 
     plt.subplots_adjust(hspace=1)
     # plt.show()
-    plt.savefig("figure/eva-speedup-case-study-a100.pdf",bbox_inches='tight')
+    plt.savefig("eva-speedup-case-study-V100.pdf",bbox_inches='tight')
 

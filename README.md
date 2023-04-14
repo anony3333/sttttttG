@@ -76,7 +76,7 @@ echo "export PATH=`pwd`/bin:\$PATH" >> ~/.bashrc
 source ~/.bashrc
 ```
 
-## build tvm-graph
+## Build tvm-graph
 Since we implement the function IR based on TVM Relay, so we need to build TVM modified by us.
 
 
@@ -114,13 +114,21 @@ pip install numpy decoprator scipy attrs
 ## How to reproduce our results 
 We have tested on a platform consisting of two Intel E5-2680 V4 CPUs with NVIDIA V100. The CUDA version is 11.7 and the driver version is 515.43.04.
 
-Copy all files in scripts/evaluation_script into test_cases and copy shape_inference.sh into /tmp
+Copy all files in scripts/evaluation_script into test_cases and copy shape_inference.sh into /tmp.
 
-```sh
-python3 my_run.py
+First, Go to directory scripts/evaluation_script.
+
+```bash
+bash setup_env.sh
 ```
 
-Test will run automaticly and for each mlir, it will create a folder named by mlir name. Tests will be runned and result will be stored in the folder.
+Then go to directory `test_cases`.
+
+```sh
+python3 run.py
+```
+
+Test will run automaticly and for each mlir, it will create a directory named by mlir name. Tests will be runned and result will be stored in the directory.
 
 Then run 
 
@@ -128,12 +136,22 @@ Then run
 python3 parsing_performance.py
 ```
 
-This script will get into each folder and parse performance and streamlist. It will generate performance_V100.json and streamlist_V100.json
+This script will get into each directory and parse performance and streamlist. It will generate performance_V100.json and streamlist_V100.json
 
-Run `python3 overall_speedup.py` for Figure7
+In directory `scripts/figure_scripts`:
 
-Run `python3 performance.py` for Figure8(a)
+Run `python3 overall_speedup.py` for Figure7 (eva-overall-speedup-v100.pdf)
 
-Run `python3 solution.py` for Figure8(b)
+Run `python3 performance.py` for Figure8(a) (eva-overall-performance-v100-part.pdf)
 
-speedup_case_study.py for Figure9
+Run `python3 solution.py` for Figure8(b) (eva-searching-v100-part.pdf)
+
+To run realworld stencil, go to directory 
+Go to directory realworld_stencil and run 
+
+```sh
+python3 run_real.py`
+python3 parsing_performance.py
+```
+In directory `scripts/figure_scripts`:
+Run `python3 speedup_case_study.py` for Figure9 (eva-speedup-case-study-V100.pdf)

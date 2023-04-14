@@ -35,7 +35,7 @@ def plot_subfig(data, x, y, ax, x_offset):
 if __name__ == "__main__":
     
     filename = "../../test_cases/performance_v100.json"
-    outname = "eva-overall-per-v100.pdf"
+    outname = "eva-overall-performace-v100.pdf"
     with open(filename, "r") as f:
         data = json.load(f)
     # filter stencil
