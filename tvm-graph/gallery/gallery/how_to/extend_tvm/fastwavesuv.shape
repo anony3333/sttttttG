@@ -1,0 +1,138 @@
+module  {
+  func @fastwavesuv(%arg0: !stencil.field<?x?x?xf64>, %arg1: !stencil.field<?x?x?xf64>, %arg2: !stencil.field<?x?x?xf64>, %arg3: !stencil.field<?x?x?xf64>, %arg4: !stencil.field<?x?x?xf64>, %arg5: !stencil.field<?x?x?xf64>, %arg6: !stencil.field<?x?x?xf64>, %arg7: !stencil.field<?x?x?xf64>, %arg8: !stencil.field<?x?x?xf64>, %arg9: !stencil.field<?x?x?xf64>, %arg10: !stencil.field<0x?x0xf64>, %arg11: !stencil.field<?x?x?xf64>) attributes {stencil.program} {
+    %0 = stencil.cast %arg0([-4, -4, -4] : [124, 124, 124]) : (!stencil.field<?x?x?xf64>) -> !stencil.field<128x128x128xf64>
+    %1 = stencil.cast %arg1([-4, -4, -4] : [124, 124, 124]) : (!stencil.field<?x?x?xf64>) -> !stencil.field<128x128x128xf64>
+    %2 = stencil.cast %arg2([-4, -4, -4] : [124, 124, 124]) : (!stencil.field<?x?x?xf64>) -> !stencil.field<128x128x128xf64>
+    %3 = stencil.cast %arg3([-4, -4, -4] : [124, 124, 124]) : (!stencil.field<?x?x?xf64>) -> !stencil.field<128x128x128xf64>
+    %4 = stencil.cast %arg4([-4, -4, -4] : [124, 124, 124]) : (!stencil.field<?x?x?xf64>) -> !stencil.field<128x128x128xf64>
+    %5 = stencil.cast %arg5([-4, -4, -4] : [124, 124, 124]) : (!stencil.field<?x?x?xf64>) -> !stencil.field<128x128x128xf64>
+    %6 = stencil.cast %arg6([-4, -4, -4] : [124, 124, 124]) : (!stencil.field<?x?x?xf64>) -> !stencil.field<128x128x128xf64>
+    %7 = stencil.cast %arg7([-4, -4, -4] : [124, 124, 124]) : (!stencil.field<?x?x?xf64>) -> !stencil.field<128x128x128xf64>
+    %8 = stencil.cast %arg8([-4, -4, -4] : [124, 124, 124]) : (!stencil.field<?x?x?xf64>) -> !stencil.field<128x128x128xf64>
+    %9 = stencil.cast %arg9([-4, -4, -4] : [124, 124, 124]) : (!stencil.field<?x?x?xf64>) -> !stencil.field<128x128x128xf64>
+    %10 = stencil.cast %arg10([-4, -4, -4] : [124, 124, 124]) : (!stencil.field<0x?x0xf64>) -> !stencil.field<0x128x0xf64>
+    %11 = stencil.cast %arg11([-4, -4, -4] : [124, 124, 124]) : (!stencil.field<?x?x?xf64>) -> !stencil.field<128x128x128xf64>
+    %12 = stencil.load %0([0, 0, 0] : [120, 120, 120]) : (!stencil.field<128x128x128xf64>) -> !stencil.temp<120x120x120xf64>
+    %13 = stencil.load %1([0, 0, 0] : [120, 120, 120]) : (!stencil.field<128x128x128xf64>) -> !stencil.temp<120x120x120xf64>
+    %14 = stencil.load %2([0, 0, 0] : [120, 120, 120]) : (!stencil.field<128x128x128xf64>) -> !stencil.temp<120x120x120xf64>
+    %15 = stencil.load %3([0, 0, 0] : [120, 120, 120]) : (!stencil.field<128x128x128xf64>) -> !stencil.temp<120x120x120xf64>
+    %16 = stencil.load %4([0, 0, 0] : [121, 121, 121]) : (!stencil.field<128x128x128xf64>) -> !stencil.temp<121x121x121xf64>
+    %17 = stencil.load %5([0, 0, -1] : [121, 121, 121]) : (!stencil.field<128x128x128xf64>) -> !stencil.temp<121x121x122xf64>
+    %18 = stencil.load %6([0, 0, 0] : [121, 121, 121]) : (!stencil.field<128x128x128xf64>) -> !stencil.temp<121x121x121xf64>
+    %19 = stencil.load %7([0, 0, 0] : [121, 121, 120]) : (!stencil.field<128x128x128xf64>) -> !stencil.temp<121x121x120xf64>
+    %20 = stencil.load %10([0, 0, 0] : [120, 120, 120]) : (!stencil.field<0x128x0xf64>) -> !stencil.temp<0x120x0xf64>
+    %21 = stencil.apply (%arg12 = %16 : !stencil.temp<121x121x121xf64>, %arg13 = %17 : !stencil.temp<121x121x122xf64>) -> !stencil.temp<121x121x121xf64> {
+      %cst = constant 1.000000e+00 : f64
+      %31 = stencil.access %arg12 [0, 0, 0] : (!stencil.temp<121x121x121xf64>) -> f64
+      %32 = stencil.access %arg13 [0, 0, 0] : (!stencil.temp<121x121x122xf64>) -> f64
+      %33 = mulf %31, %32 : f64
+      %34 = subf %cst, %31 : f64
+      %35 = stencil.access %arg13 [0, 0, -1] : (!stencil.temp<121x121x122xf64>) -> f64
+      %36 = mulf %35, %34 : f64
+      %37 = addf %33, %36 : f64
+      %38 = stencil.store_result %37 : (f64) -> !stencil.result<f64>
+      stencil.return %38 : !stencil.result<f64>
+    } to ([0, 0, 0] : [121, 121, 121])
+    %22 = stencil.buffer %21 : (!stencil.temp<121x121x121xf64>) -> !stencil.temp<121x121x121xf64>
+    %23 = stencil.apply (%arg12 = %22 : !stencil.temp<121x121x121xf64>) -> !stencil.temp<121x121x120xf64> {
+      %31 = stencil.access %arg12 [0, 0, 1] : (!stencil.temp<121x121x121xf64>) -> f64
+      %32 = stencil.access %arg12 [0, 0, 0] : (!stencil.temp<121x121x121xf64>) -> f64
+      %33 = subf %31, %32 : f64
+      %34 = stencil.store_result %33 : (f64) -> !stencil.result<f64>
+      stencil.return %34 : !stencil.result<f64>
+    } to ([0, 0, 0] : [121, 121, 120])
+    %24 = stencil.buffer %23 : (!stencil.temp<121x121x120xf64>) -> !stencil.temp<121x121x120xf64>
+    %25 = stencil.apply (%arg12 = %17 : !stencil.temp<121x121x122xf64>, %arg13 = %24 : !stencil.temp<121x121x120xf64>, %arg14 = %18 : !stencil.temp<121x121x121xf64>) -> !stencil.temp<120x120x120xf64> {
+      %cst = constant 5.000000e-01 : f64
+      %31 = stencil.access %arg12 [1, 0, 0] : (!stencil.temp<121x121x122xf64>) -> f64
+      %32 = stencil.access %arg12 [0, 0, 0] : (!stencil.temp<121x121x122xf64>) -> f64
+      %33 = subf %31, %32 : f64
+      %34 = stencil.access %arg13 [1, 0, 0] : (!stencil.temp<121x121x120xf64>) -> f64
+      %35 = stencil.access %arg13 [0, 0, 0] : (!stencil.temp<121x121x120xf64>) -> f64
+      %36 = addf %34, %35 : f64
+      %37 = mulf %cst, %36 : f64
+      %38 = stencil.access %arg14 [0, 0, 1] : (!stencil.temp<121x121x121xf64>) -> f64
+      %39 = stencil.access %arg14 [0, 0, 0] : (!stencil.temp<121x121x121xf64>) -> f64
+      %40 = stencil.access %arg14 [1, 0, 1] : (!stencil.temp<121x121x121xf64>) -> f64
+      %41 = stencil.access %arg14 [1, 0, 0] : (!stencil.temp<121x121x121xf64>) -> f64
+      %42 = addf %38, %39 : f64
+      %43 = addf %40, %41 : f64
+      %44 = subf %42, %43 : f64
+      %45 = subf %38, %39 : f64
+      %46 = subf %40, %41 : f64
+      %47 = addf %45, %46 : f64
+      %48 = divf %44, %47 : f64
+      %49 = mulf %37, %48 : f64
+      %50 = addf %33, %49 : f64
+      %51 = stencil.store_result %50 : (f64) -> !stencil.result<f64>
+      stencil.return %51 : !stencil.result<f64>
+    } to ([0, 0, 0] : [120, 120, 120])
+    %26 = stencil.buffer %25 : (!stencil.temp<120x120x120xf64>) -> !stencil.temp<120x120x120xf64>
+    %27 = stencil.apply (%arg12 = %17 : !stencil.temp<121x121x122xf64>, %arg13 = %24 : !stencil.temp<121x121x120xf64>, %arg14 = %18 : !stencil.temp<121x121x121xf64>) -> !stencil.temp<120x120x120xf64> {
+      %cst = constant 5.000000e-01 : f64
+      %31 = stencil.access %arg12 [0, 1, 0] : (!stencil.temp<121x121x122xf64>) -> f64
+      %32 = stencil.access %arg12 [0, 0, 0] : (!stencil.temp<121x121x122xf64>) -> f64
+      %33 = subf %31, %32 : f64
+      %34 = stencil.access %arg13 [0, 1, 0] : (!stencil.temp<121x121x120xf64>) -> f64
+      %35 = stencil.access %arg13 [0, 0, 0] : (!stencil.temp<121x121x120xf64>) -> f64
+      %36 = addf %34, %35 : f64
+      %37 = mulf %cst, %36 : f64
+      %38 = stencil.access %arg14 [0, 0, 1] : (!stencil.temp<121x121x121xf64>) -> f64
+      %39 = stencil.access %arg14 [0, 0, 0] : (!stencil.temp<121x121x121xf64>) -> f64
+      %40 = stencil.access %arg14 [0, 1, 1] : (!stencil.temp<121x121x121xf64>) -> f64
+      %41 = stencil.access %arg14 [0, 1, 0] : (!stencil.temp<121x121x121xf64>) -> f64
+      %42 = addf %38, %39 : f64
+      %43 = addf %40, %41 : f64
+      %44 = subf %42, %43 : f64
+      %45 = subf %38, %39 : f64
+      %46 = subf %40, %41 : f64
+      %47 = addf %45, %46 : f64
+      %48 = divf %44, %47 : f64
+      %49 = mulf %37, %48 : f64
+      %50 = addf %33, %49 : f64
+      %51 = stencil.store_result %50 : (f64) -> !stencil.result<f64>
+      stencil.return %51 : !stencil.result<f64>
+    } to ([0, 0, 0] : [120, 120, 120])
+    %28 = stencil.buffer %27 : (!stencil.temp<120x120x120xf64>) -> !stencil.temp<120x120x120xf64>
+    %29 = stencil.apply (%arg12 = %12 : !stencil.temp<120x120x120xf64>, %arg13 = %13 : !stencil.temp<120x120x120xf64>, %arg14 = %26 : !stencil.temp<120x120x120xf64>, %arg15 = %19 : !stencil.temp<121x121x120xf64>, %arg16 = %20 : !stencil.temp<0x120x0xf64>) -> !stencil.temp<120x120x120xf64> {
+      %cst = constant 1.000000e+01 : f64
+      %cst_0 = constant 2.000000e+00 : f64
+      %31 = stencil.access %arg14 [0, 0, 0] : (!stencil.temp<120x120x120xf64>) -> f64
+      %32 = stencil.access %arg15 [1, 0, 0] : (!stencil.temp<121x121x120xf64>) -> f64
+      %33 = stencil.access %arg15 [0, 0, 0] : (!stencil.temp<121x121x120xf64>) -> f64
+      %34 = stencil.access %arg16 [0, 0, 0] : (!stencil.temp<0x120x0xf64>) -> f64
+      %35 = addf %32, %33 : f64
+      %36 = mulf %cst_0, %34 : f64
+      %37 = divf %36, %35 : f64
+      %38 = mulf %31, %37 : f64
+      %39 = stencil.access %arg13 [0, 0, 0] : (!stencil.temp<120x120x120xf64>) -> f64
+      %40 = subf %39, %38 : f64
+      %41 = mulf %cst, %40 : f64
+      %42 = stencil.access %arg12 [0, 0, 0] : (!stencil.temp<120x120x120xf64>) -> f64
+      %43 = addf %41, %42 : f64
+      %44 = stencil.store_result %43 : (f64) -> !stencil.result<f64>
+      stencil.return %44 : !stencil.result<f64>
+    } to ([0, 0, 0] : [120, 120, 120])
+    %30 = stencil.apply (%arg12 = %14 : !stencil.temp<120x120x120xf64>, %arg13 = %15 : !stencil.temp<120x120x120xf64>, %arg14 = %28 : !stencil.temp<120x120x120xf64>, %arg15 = %19 : !stencil.temp<121x121x120xf64>) -> !stencil.temp<120x120x120xf64> {
+      %cst = constant 1.000000e+01 : f64
+      %cst_0 = constant 9.765625E-4 : f64
+      %31 = stencil.access %arg14 [0, 0, 0] : (!stencil.temp<120x120x120xf64>) -> f64
+      %32 = stencil.access %arg15 [0, 1, 0] : (!stencil.temp<121x121x120xf64>) -> f64
+      %33 = stencil.access %arg15 [0, 0, 0] : (!stencil.temp<121x121x120xf64>) -> f64
+      %34 = addf %32, %33 : f64
+      %35 = divf %cst_0, %34 : f64
+      %36 = mulf %31, %35 : f64
+      %37 = stencil.access %arg13 [0, 0, 0] : (!stencil.temp<120x120x120xf64>) -> f64
+      %38 = subf %37, %36 : f64
+      %39 = mulf %cst, %38 : f64
+      %40 = stencil.access %arg12 [0, 0, 0] : (!stencil.temp<120x120x120xf64>) -> f64
+      %41 = addf %39, %40 : f64
+      %42 = stencil.store_result %41 : (f64) -> !stencil.result<f64>
+      stencil.return %42 : !stencil.result<f64>
+    } to ([0, 0, 0] : [120, 120, 120])
+    stencil.store %29 to %8([0, 0, 0] : [120, 120, 120]) : !stencil.temp<120x120x120xf64> to !stencil.field<128x128x128xf64>
+    stencil.store %30 to %9([0, 0, 0] : [120, 120, 120]) : !stencil.temp<120x120x120xf64> to !stencil.field<128x128x128xf64>
+    return
+  }
+}
+
