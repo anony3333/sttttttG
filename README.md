@@ -147,10 +147,10 @@ Run `python3 performance.py` for Figure8(a) (eva-overall-performance-v100-part.p
 Run `python3 solution.py` for Figure8(b) (eva-searching-v100-part.pdf)
 
 To run realworld stencil, go to directory 
-Go to directory realworld_stencil and run 
+realworld_stencil and run 
 
 ```sh
-python3 run_real.py`
+python3 run_real.py
 python3 parsing_performance.py
 ```
 In directory `scripts/figure_scripts`:
